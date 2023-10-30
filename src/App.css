@@ -40,3 +40,14 @@ html {
     transform: rotate(360deg);
   }
 }
+
+.creator {
+  position: absolute;
+  left: calc(50% - 80px);
+  padding: 8px;
+  border-radius: 20px;
+  color: rgba(229, 241, 169, 0.50);
+  font-size: 12px;
+  background-color:rgba(255, 255, 255, 0.03);
+  ;
+}

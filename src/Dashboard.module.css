@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap');
+
+.page {
+    margin-top: 64px;
+    display: flex;
+    gap: 40px;
+    height: calc(100vh - 160px);
+    padding: 56px 40px;
+}
+
+.random {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 24px;
+}
+
+.OTD {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    flex: 1;
+    max-width: 310px;
+}
+
+.discover {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    flex: 1;
+    max-width: 428px;
+    text-align: left;
+}
+
+.h3 {
+    color: #FBFFE5;
+    font-family: Quicksand;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px; /* 116.667% */
+}
+
+.random-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.random-header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.random-header-text, .discover-header  h3 {
+    color: #FBFFE5;
+    font-family: Quicksand;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px; /* 116.667% */
+}
+
+.random-header-text p {
+    color: rgba(229, 241, 169, 0.60);
+    font-family: Quicksand;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 116.667% */
+ 
+}
+
+.random-header button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 12px;
+    border: 1px solid rgba(229, 241, 169, 0.07);
+    background: #090E01;
+    /*text stlying*/
+    color: #FBFFE5;
+    text-align: center;
+    font-family: Quicksand;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    transition: all 0.3s ease-out;
+}
+
+.random-header:hover button {
+    background: rgba(251, 255, 229, 0.07);
+    cursor: pointer;
+    transform: translateY(-3px);
+}
+
+.random-header:active button {
+    background: rgba(251, 255, 229, 0.02);
+    cursor: pointer;
+    transform: translateY(0px);
+}
+
+.randomMealImage {
+    display: flex;
+    width: 100%;
+    height: 590px;
+    border-radius: 24px;
+    overflow: hidden;
+    flex: 1;
+    position: relative;
+}
+
+.randomMealTint {
+    background: rgba(9, 14, 1, 0.50);
+    flex: 1;
+    padding: 24px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.randomMealTint p {
+    color: rgba(251, 255, 229, 0.80);
+    font-family: Quicksand;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+    overflow: hidden;  
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.randomMealPills {
+    display: flex;
+    gap: 8px;
+}
+
+.randomMealPill {
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 20px;
+    background: rgba(168, 207, 56, 0.20);
+    backdrop-filter: blur(2px);
+    /*text styling*/
+    color: #A8CF38;
+    text-align: center;
+    font-family: Quicksand;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.fav {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    padding: 12px;
+    border-radius: 50%;
+    background: rgba(229, 241, 169, 0.20);
+    backdrop-filter: blur(2px);
+    display: flex;
+}
+
+.discover-header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.discover-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.discover-body p {
+    color: rgba(251, 255, 229, 0.60);
+    font-family: Quicksand;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.discover-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 480px;
+    overflow-y: scroll;
+}
+
+.discover-item {
+    display: flex;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border-bottom: 1px solid rgba(251, 255, 229, 0.07);
+}
+
+.discover-item:hover {
+    background-color: rgba(251, 255, 229, 0.07);
+    cursor: pointer;
+}
+
+.discover-item p {
+    color: #FBFFE5;
+    font-family: Quicksand;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 133.333% */
+}
+
+.tab-container {
+    display: flex;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.tab {
+    display: flex;
+    height: 48px;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    border-radius: 12px;
+    box-sizing: border-box;
+    /*text styling*/
+    color: rgba(229, 241, 169, 0.60);
+    font-family: Quicksand;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.tab:hover {
+    cursor: pointer;
+    background: rgba(251, 255, 229, 0.03);
+}

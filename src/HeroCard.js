@@ -20,7 +20,7 @@ function HeroCard(props) {
     <div className="card-container">
       <div className={`${styles.card} ${styles[cardType]}`} style={cardStyle}>
         <div className={styles.content}>
-            <h3>{props.title}</h3>
+            <h3 className={styles.h3}>{props.title}</h3>
             <p className={styles.p}>{props.body}</p>
         </div>
       </div>
