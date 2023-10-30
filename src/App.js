@@ -1,11 +1,10 @@
 import './App.css';
-import HeroCardGroup from './HeroCardGroup';
+import Home from './Landing'
 
 function App() {
   return (
     <div className="App">
-      <div>Spacerrr</div>
-      <HeroCardGroup/>
+      <Home/>
     </div>
   );
 }
