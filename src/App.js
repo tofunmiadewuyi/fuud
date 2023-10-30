@@ -1,11 +1,14 @@
 import './App.css';
-import HeroCardGroup from './HeroCardGroup';
+import Dashboard from './Dashboard';
+import Home from './Landing'
+import TopBar from './TopBar';
 
 function App() {
   return (
     <div className="App">
-      <div>Spacerrr</div>
-      <HeroCardGroup/>
+      <TopBar user='Tofunmi'/>
+      <Dashboard/>
+      <div className='creator'>Made with 🍏 by 7ofunm1</div>
     </div>
   );
 }

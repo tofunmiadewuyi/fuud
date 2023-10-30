@@ -1,27 +1,30 @@
 import React from 'react'
-import './App.css';
+import styles from './HeroCardGroup.module.css';
 import HeroCard from './HeroCard';
 
 function HeroCardGroup() {
   return (
-    <div className='image-group'>
-        <div className="left-image">
+    <div className={styles['image-group']}>
+        <div className={styles['left-image']}>
           <HeroCard 
+          position="left"
           title="Chicken"
-          body="Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times.[1] Beef is a source of high-quality protein and essential nutrients.[2]"
-          image={`url("https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg")`}/>
+          body="Chicken is a type of domesticated fowl, a subspecies of the red junglefowl. It is one of the most common and widespread domestic animals, with a total population of more than 19 billion as of 2011.[1] Humans commonly keep chickens as a source of food (consuming both their meat and eggs) and, more rarely, as pets."
+          image={`url("${process.env.PUBLIC_URL}/images/chickenimage.png")`}/>
         </div>
-        <div className="center-image">
+        <div className={styles['center-image']}>
           <HeroCard 
+          position="center"
           title="Beef"
           body="Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times.[1] Beef is a source of high-quality protein and essential nutrients.[2]"
-          image={`url("https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg")`}/>
+          image={`url("${process.env.PUBLIC_URL}/images/beefimage.png")`}/>
         </div>
-        <div className="right-image">
-          <HeroCard 
-          title="Chicken"
-          body="Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times.[1] Beef is a source of high-quality protein and essential nutrients.[2]"
-          image={`url("https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg")`}/>
+        <div className={styles['right-image']}>
+          <HeroCard
+          position="right"
+          title="Dessert"
+          body="Dessert is a course that concludes a meal. The course usually consists of sweet foods, such as confections dishes or fruit, and possibly a beverage such as dessert wine or liqueur, however in the United States it may include coffee, cheeses, nuts, or other savory items regarded as a separate course elsewhere."
+          image={`url("${process.env.PUBLIC_URL}/images/dessertimage.png")`}/>
         </div>
       </div>
   )

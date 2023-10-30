@@ -1,0 +1,51 @@
+.container {
+    position: fixed;
+    top: 0;
+    /* background-color: red; */
+    width: 100vw;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 40px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(229, 241, 169, 0.05);
+}
+
+.logo {
+    display: flex;
+    justify-content: flex-start;
+    flex: 1;
+}
+
+.user {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    color: #FBFFE5;
+    font-family: Quicksand;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 133.333% */
+    flex: 1;
+}
+
+.searchbarContainer {
+    display: flex;
+    position: relative;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.searchIcon {
+    position: absolute;
+    top: calc(50% - 10px);
+    right: calc(296px + 48px);
+}
+
+.searchbar {
+    width: 296px;
+    height: 40px; 
+    padding: 0px 40px;
+}
