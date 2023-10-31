@@ -15,9 +15,23 @@ function Tabs(props) {
 
   return (
     <div className={styles['tab-container']}>
-        <div className={styles.tab} style={props.current === "Categories" ? activeTab: inactiveTab }>Categories</div>
-        <div className={styles.tab} style={props.current === "Country" ? activeTab: inactiveTab }>Country</div>
-        <div className={styles.tab} style={props.current === "Ingredients" ? activeTab: inactiveTab }>Ingredients</div>
+        <div className={styles.tab} 
+             style={props.current === "Categories" ? activeTab: inactiveTab }
+             onClick={() => props.changeTab("Categories")}>
+              Categories
+          </div>
+
+        <div className={styles.tab} 
+             style={props.current === "Countries" ? activeTab: inactiveTab }
+             onClick={() => props.changeTab("Countries")}>
+              Countries
+          </div>
+
+        <div className={styles.tab} 
+             style={props.current === "Ingredients" ? activeTab: inactiveTab }
+             onClick={() => props.changeTab("Ingredients")}>
+              Ingredients
+          </div>
     </div>
   )
 }
