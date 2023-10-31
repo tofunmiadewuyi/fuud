@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Agbalumo&display=swap');
+
+body {
+    color: #FBFFE5;
+    font-family: 'Quicksand', sans-serif;
+    box-sizing: border-box;
+}
+
+.page {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    height: calc(100vh - 160px);
+    padding: 56px 40px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.h2 {
+    color: #FBFFE5;
+    font-family: Agbalumo;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.h3 {
+    color: #344C08;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.breadcrumbs {
+    color: #FBFFE5;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.content {
+    display: flex;
+    gap: 40px;
+}
+
+.itemMealOTD {
+    border-radius: 24px;
+    border: 1px solid rgba(229, 241, 169, 0.03);
+    background: #38CFBB;
+    width: 427px;
+    height: 100%;
+    border-radius: 24px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.itemMealOTDImage {
+    background-color: #344C08;
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 16px;
+    display: flex
+}
+
+.tint {
+    background: rgba(9, 14, 1, 0.50);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 24px;
+    flex: 1;
+}
+
+.tint p {
+    color: #FBFFE5;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px; /* 116.667% */
+}
+
+.itemResults {
+    background-color: blueviolet;
+    flex: 1;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    height: calc(100vh - 280px);
+    overflow-y: scroll;
+}

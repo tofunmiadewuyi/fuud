@@ -3,9 +3,21 @@ import styles from './OTD.module.css'
 
 function OTD(props) {
 
+    var imageURL;
+
+    const getImage =() => {
+      if (props.image != null) {
+        imageURL =  `url("${props.image}")`
+      } else {
+        imageURL = `url(${process.env.PUBLIC_URL}/images/categories/${props.name}.png)`
+      }
+    }
+    getImage()
+
     const imageDivStyle = {
-        backgroundImage: props.image,
-        backgroundSize: "cover"
+        backgroundImage: imageURL,
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
     }
     const containerDivStyle = {
         backgroundColor: props.bgcolor
@@ -17,7 +29,7 @@ function OTD(props) {
       <h3 className={styles.h3}>{props.type} of the Day</h3>
       <div className={styles.imageContainer} style={imageDivStyle}>
         <div className={styles.tint}>
-            <h5 className={styles.h5}>{props.item}</h5>
+            <h5 className={styles.h5}>{props.name}</h5>
         </div>
       </div>
     </div>

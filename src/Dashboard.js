@@ -17,48 +17,165 @@ class Dashboard extends Component {
             name: 'Chicken',
             desc: 'Chicken is a type of domesticated fowl, a subspecies of the red junglefowl. It is one of the most common and widespread domestic animals, with a total population of more than 19 billion as of 2011.[1] Humans commonly keep chickens as a source of food (consuming both their meat and eggs) and, more rarely, as pets'
          },
-         mealOTD: '',
-         categoryOTD: '',
+         mealOTD: {},
+         categoryOTD: {},
          currentTab: 'Categories',
+         discoverData: [],
       }
+
+      this.changeTab = this.changeTab.bind(this)
     }
 
     componentDidMount() {
         this.fetchRandom()
         this.fetchCategories()
+        this.getCategoryOTD()
+        this.getMealOTD()
+    }
+
+    getMealOTD() {
+        try{
+            const url = "https://www.themealdb.com/api/json/v1/1/random.php"
+
+            fetch(url)
+            .then(res => {
+                if(!res.ok) {
+                    throw new Error('Network response was not okay man.')
+                }
+                return res.json()
+            })
+            .then(data => {
+                const meal = data.meals[0]
+                this.setState({
+                    mealOTD: {
+                        mealName: meal.strMeal,
+                        mealImage: meal.strMealThumb,
+                    }
+                })
+                
+            })
+        }
+        catch(error) {
+            console.error('From 7', error)
+        }
+    }
+
+    getCategoryOTD() {
+        try{
+            const url = "https://www.themealdb.com/api/json/v1/1/categories.php";
+            fetch(url)
+            .then(res => {
+                if(!res.ok) {
+                    throw new Error('Network response was not okay man.')
+                }
+                return res.json()
+            })
+            .then(data => {
+                const min = 0;
+                const max = data.categories.length
+
+                const randomCategoryIndex = Math.floor(Math.random() * (max - min) )
+
+                const category = data.categories[randomCategoryIndex]
+
+                this.setState({
+                    categoryOTD: {
+                        categoryName: category.strCategory,
+                        categoryImage: category.strCategoryThumb,
+                    }
+                })
+                
+            })
+        }
+        catch(error) {
+            console.error('From 7', error)
+        }
+        
+    }
+
+    changeTab(changeTo) {
+        this.setState({
+            currentTab: changeTo
+        })
+        this.fetchTabItems(changeTo)
     }
 
     handleRandomButtonClick = () => {
         this.fetchRandom()
     }
 
-    async fetchRandom() {
-        const url = "https://www.themealdb.com/api/json/v1/1/random.php"
-
-        fetch(url)
-        .then((res) => {
-            if(!res.ok) {
-                throw new Error('Network response was not okay man.')
-            }
-            return res.json()
-        })
-        .then((data) => {
-            const meal = data.meals[0]
-            this.setState({
-                randomMeal:  {
-                    image: `url("${meal.strMealThumb}")`,
-                    name: meal.strMeal,
-                    desc: '',
-                    area: meal.strArea,
-                    category: meal.strCategory,
-                }
-            })
-            console.log(data.meals[0].strMealThumb)
-        })
+    fetchTabItems(category) {
+        if (category === "Categories") {
+            this.fetchCategories()
+        } else if (category === "Countries") {
+            this.fetchCountries()
+        } else if (category === "Ingredients") {
+            this.fetchIngredients()
+        } else (
+            alert('what have you cooked')
+        )
     }
 
-    async fetchCategories() {
+    fetchRandom() {
+        const url = "https://www.themealdb.com/api/json/v1/1/random.php"
+
+        try {
+            fetch(url)
+            .then((res) => {
+                if(!res.ok) {
+                    throw new Error('Network response was not okay man.')
+                }
+                return res.json()
+            })
+            .then((data) => {
+                const meal = data.meals[0]
+                this.setState({
+                    randomMeal:  {
+                        image: `url("${meal.strMealThumb}")`,
+                        name: meal.strMeal,
+                        desc: '',
+                        area: meal.strArea,
+                        category: meal.strCategory,
+                    }
+                })
+            })
+            .catch(error => {
+                console.error("From-Tofs, An error occured:", error)
+            })
+        }
+        catch (error) {
+            console.error('From-Tofs, Synchronous error', error)
+        }
+
+    }
+
+    fetchCategories() {
         const url = "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
+        try {
+            fetch(url)
+            .then((res) => {
+                if(!res.ok) {
+                    throw new Error('Network response was not okay man.')
+                }
+                return res.json()
+            })
+            .then((data) => {
+                // console.log(data.meals)
+                this.setState({
+                    discoverData: data.meals
+                })
+            })
+            .catch(error => {
+                console.error('From 7, An error occured', error)
+            })
+        } 
+        catch(error) {
+            console.error('From 7, Sybchronous error', error)
+        }
+    }
+
+    fetchCountries() {
+        const url = "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
         fetch(url)
         .then((res) => {
             if(!res.ok) {
@@ -67,11 +184,36 @@ class Dashboard extends Component {
             return res.json()
         })
         .then((data) => {
-            // console.log(data.meals)
+            console.log(data.meals[0])
             this.setState({
                 discoverData: data.meals
             })
         })
+    }
+
+    fetchIngredients() {
+        const url = "https://www.themealdb.com/api/json/v1/1/list.php?i=list"
+        try{
+            fetch(url)
+            .then((res) => {
+                if(!res.ok) {
+                    throw new Error('Network response was not okay man.')
+                }
+                return res.json()
+            })
+            .then((data) => {
+                console.log(data.meals[0])
+                this.setState({
+                    discoverData: data.meals
+                })
+            })
+            .catch(error => {
+                console.error('From 7, A error occured:', error)
+            })
+        }
+        catch(error) {
+            console.error('From 7, Sybchronous error:', error)
+        }
     }
     
   render() {
@@ -107,24 +249,23 @@ class Dashboard extends Component {
             </div>
         </div>
         <div className={styles.OTD}>
-            <OTD type='Meal' bgcolor='#38CFBB' item='Dessert'
-                image={`url("${process.env.PUBLIC_URL}/images/dessertimage.png")`}/>
-            <OTD type='Category' bgcolor='#A8CF38' item='Lamb'
-                image={`url("${process.env.PUBLIC_URL}/images/lambimage.png")`}/>
+            <OTD type='Meal' bgcolor='#38CFBB' name={this.state.mealOTD.mealName}
+                 image={this.state.mealOTD.mealImage}/>
+            <OTD type='Category' bgcolor='#A8CF38' name={this.state.categoryOTD.categoryName}/>
         </div>
         <div className={styles.discover}>
             <div className={styles['discover-header']}>
                 <h3>Discover meals</h3>
                 <div>
-                    <Tabs current={this.state.currentTab}/>
+                    <Tabs current={this.state.currentTab} changeTab={this.changeTab}/>
                 </div>
             </div>
             <div className={styles['discover-body']}>
                 <p>{this.state.discoverData != null ? this.state.discoverData.length : 'Loading'} results</p>
                 <div className={styles['discover-items']}>
                     { this.state.discoverData != null ? 
-                    this.state.discoverData.map((item) => {
-                       return <DiscoverItem key={item.strCategory} name={item.strCategory}/>
+                    this.state.discoverData.map((item, index) => {
+                       return <DiscoverItem key={index} name={item.strCategory || item.strArea || item.strIngredient}/>
                     })
                      : <p></p>}
                 </div>

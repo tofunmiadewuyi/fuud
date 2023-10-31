@@ -12,3 +12,5 @@ class DiscoverItem extends Component {
 }
 
 export default DiscoverItem
+
+//this is the disover item thats part of the lists in the discover section of the dashboard
