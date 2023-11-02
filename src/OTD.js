@@ -27,7 +27,7 @@ function OTD(props) {
   return (
     <div className={styles.container} style={containerDivStyle}>
       <h3 className={styles.h3}>{props.type} of the Day</h3>
-      <div className={styles.imageContainer} style={imageDivStyle}>
+      <div className={styles.imageContainer} style={imageDivStyle} onClick={props.click}>
         <div className={styles.tint}>
             <h5 className={styles.h5}>{props.name}</h5>
         </div>

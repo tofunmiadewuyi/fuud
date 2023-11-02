@@ -11,6 +11,7 @@
     box-sizing: border-box;
     border-bottom: 1px solid rgba(229, 241, 169, 0.05);
     z-index: 5;
+    background-color: #090E01;
 }
 
 .logo {

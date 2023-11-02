@@ -1,8 +1,26 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import HeroCardGroup from './HeroCardGroup';
 import styles from './Landing.module.css';
+import { useNavigate } from 'react-router-dom';
+
 
 function Landing() {
+  const navigate = useNavigate();
+  const inputRef = useRef()
+
+  
+  function handleClick() {
+    if (inputRef.current != null && inputRef.current.value.trim() !== '') {
+      const user = inputRef.current.value
+      const userData  = {name: user}
+      navigate('/dashboard', {state: {userData}})
+    }
+  }
+
+  useEffect(() => {
+ 
+  })
+
   return (
     <div className={styles.page}>
         <div className={styles.hero}>
@@ -12,8 +30,8 @@ function Landing() {
                 <p>Find fun recipes for meals from around the world. Whether you're a seasoned chef or just starting your cooking journey, these recipes are your key to creating mouthwatering masterpieces in your very own kitchen.</p>
             </div>
             <div className={styles['input-group']}>
-              <input type='text' placeholder='What is your name?' />
-              <button type='submit'>Start exploring</button>
+              <input ref={inputRef} type='text' placeholder='What is your name?' />
+              <button type='submit' onClick={handleClick}>Start exploring</button>
             </div>
         </div>
         <div className={styles['card-group']}>

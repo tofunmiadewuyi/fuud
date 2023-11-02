@@ -1,10 +1,10 @@
-import styles from "./Dashboard.module.css"
+import styles from "./App.module.css"
 import React, { Component } from 'react'
 
 class DiscoverItem extends Component {
   render() {
     return (
-      <div className={styles['discover-item']}>
+      <div className={styles['discover-item']} onClick={this.props.onclick}>
         <p>{this.props.name}</p>
       </div>
     )

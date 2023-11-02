@@ -24,7 +24,6 @@ class TopBar extends Component {
   componentDidMount() {
     document.addEventListener('mousedown', this.handleDocumentClick);
 
-    console.log("Element??" + this.menuRef.current)
   }
   
   componentWillUnmount() {
@@ -51,6 +50,9 @@ class TopBar extends Component {
     }
   }
   
+  handleLogOut = () => {
+
+  }
 
 
 
@@ -81,7 +83,7 @@ class TopBar extends Component {
             <img src={about} alt="about-icon"/>
               About</div>
             <span className={styles.divider}></span>
-            <div className={styles.menuOption}>
+            <div className={styles.menuOption} onClick={this.handleLogOut}>
             <img src={logout} alt="logout-icon"/>
               Log out</div>
           </div>

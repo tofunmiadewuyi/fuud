@@ -43,14 +43,14 @@
 .random-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-start;
 }
 
 .random-header-text {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    align-items: start;
+    align-items: flex-start;
 }
 
 .random-header-text, .discover-header  h3 {
@@ -80,6 +80,8 @@
     border-radius: 12px;
     border: 1px solid rgba(229, 241, 169, 0.07);
     background: #090E01;
+    height: 58px;
+    padding: 0 24px;
     /*text stlying*/
     color: #FBFFE5;
     text-align: center;
@@ -91,7 +93,7 @@
     transition: all 0.2s ease-out;
 }
 
-.random-header:hover button {
+.random-header button:hover {
     background: rgba(251, 255, 229, 0.07);
     cursor: pointer;
     transform: translateY(-3px);
@@ -117,6 +119,7 @@
 .randomMealImage:hover {
     transform: translateY(-3px) rotate(1deg);
     scale: 1.01;
+    cursor: pointer;
 }
 
 .randomMealTint {
