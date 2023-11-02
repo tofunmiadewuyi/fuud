@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from "./Dashboard.module.css"
+import styles from "./App.module.css"
 
 function Tabs(props) {
 
@@ -9,9 +9,7 @@ function Tabs(props) {
         background: 'linear-gradient(0deg, rgba(229, 241, 169, 0.07) 0%, rgba(229, 241, 169, 0.07) 100%), #090E01',
       }
 
-    const inactiveTab = {
-
-    }
+    const inactiveTab = {}
 
   return (
     <div className={styles['tab-container']}>

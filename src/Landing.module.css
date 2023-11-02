@@ -85,7 +85,7 @@ input:focus {
     outline: 2px solid #E5F1A9;
 }
 
-button {
+.input-group button {
     width: 160px;
     height: 48px;
     border-radius: 12px;
@@ -99,5 +99,11 @@ button {
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    transition: all 0.2s ease-out;
+}
 
+.input-group button:hover {
+    background: rgba(229, 241, 169, 0.70);
+    cursor: pointer;
+    transform: translateY(-2px);
 }

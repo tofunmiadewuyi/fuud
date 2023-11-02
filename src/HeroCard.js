@@ -7,7 +7,7 @@ function HeroCard(props) {
 
     const cardStyle = {
         backgroundImage: props.image,
-        backgroundColor: "red",
+        backgroundColor: "rgba(9, 14, 1, 0.50)",
         backgroundSize: "cover"
     }
 

@@ -3,7 +3,6 @@ import styles from './DiscoverPageItem.module.css'
 
 function DiscoverPageItem(props) {
     const background = {
-        // backgroundImage:`url(${process.env.PUBLIC_URL}/images/dessertimage.png)`,
         backgroundImage: `url(${props.image})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center center'
@@ -11,7 +10,9 @@ function DiscoverPageItem(props) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.itemImage} style={background}></div>
+      <div className={styles.itemImage} style={background}>
+        <div className={styles.tint}></div>
+      </div>
       <p className={styles.itemName}>{props.name}</p>
     </div>
   )
