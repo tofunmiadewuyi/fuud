@@ -25,6 +25,30 @@ function DashboardPage(props) {
   }, []);
 
   const getMealOTD = () => {
+    const mealOTD = localStorage.getItem('mealOTD')
+
+    if (mealOTD !== null) {
+      const parsedMealOTD = JSON.parse(mealOTD)
+      const timeStamp = new Date(parsedMealOTD.timestamp)
+      const today = new Date();
+      const isSameDay =
+      timeStamp.getMonth() === today.getMonth() &&
+      timeStamp.getDate() === today.getDate()
+
+      if (isSameDay) {
+        setMealOTD({
+          name: parsedMealOTD.meal.strMeal,
+          mealImage: parsedMealOTD.meal.strMealThumb,
+        })
+      } else {
+        fetchMealOTD()
+      }
+    } else {
+      fetchMealOTD()
+    }
+  };
+
+  const fetchMealOTD = () => {
     try {
       const url = 'https://www.themealdb.com/api/json/v1/1/random.php';
 
@@ -41,13 +65,46 @@ function DashboardPage(props) {
             name: meal.strMeal,
             mealImage: meal.strMealThumb,
           });
+
+          const dataToSave = {
+            meal: meal,
+            timestamp: new Date().toISOString()
+          }
+          localStorage.setItem('mealOTD', JSON.stringify(dataToSave) );
         });
+
     } catch (error) {
       console.error('From 7', error);
     }
-  };
+  }
 
   const getCategoryOTD = () => {
+    const categoryOTD = localStorage.getItem('categoryOTD')
+
+    if(categoryOTD !== null) {
+      const parsedCategoryOTD = JSON.parse(categoryOTD)
+      const timeStamp = new Date(parsedCategoryOTD.timestamp)
+      const today = new Date();
+      const isSameDay =
+      timeStamp.getMonth() === today.getMonth() &&
+      timeStamp.getDate() === today.getDate()
+
+      if (isSameDay) {
+        setCategoryOTD({
+          categoryName: parsedCategoryOTD.category.strCategory,
+          categoryImage: parsedCategoryOTD.category.strCategoryThumb,
+        })
+        console.log(parsedCategoryOTD)
+      } else {
+        fetchCategoryOTD()
+      }
+      
+    } else {
+      fetchCategoryOTD()
+    }
+  };
+
+  const fetchCategoryOTD = () => {
     try {
       const url = 'https://www.themealdb.com/api/json/v1/1/categories.php';
       fetch(url)
@@ -66,11 +123,16 @@ function DashboardPage(props) {
             categoryName: category.strCategory,
             categoryImage: category.strCategoryThumb,
           });
+          const dataToSave = {
+            category: category,
+            timestamp: new Date().toISOString()
+          }
+          localStorage.setItem('categoryOTD', JSON.stringify(dataToSave) );
         });
     } catch (error) {
       console.error('From 7', error);
     }
-  };
+  }
 
   const changeTab = (changeTo) => {
     setCurrentTab(changeTo);
@@ -228,8 +290,15 @@ function DashboardPage(props) {
         </div>
       </div>
       <div className={styles.OTD}>
-        <OTD type="Meal" bgcolor="#38CFBB" name={mealOTD.name} image={mealOTD.mealImage} click={handleMealOTDClick} />
-        <OTD type="Category" bgcolor="#A8CF38" name={categoryOTD.categoryName} />
+        <OTD type="Meal" 
+          bgcolor="#38CFBB" 
+          name={mealOTD.name} 
+          image={mealOTD.mealImage} 
+          click={handleMealOTDClick} />
+        <OTD type="Category" 
+          bgcolor="#A8CF38" 
+          name={categoryOTD.categoryName}
+          click={() => handleDiscoverClick(categoryOTD.categoryName, 'Categories')} />
       </div>
       <div className={styles.discover}>
         <div className={styles['discover-header']}>

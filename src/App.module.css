@@ -265,3 +265,34 @@
     cursor: pointer;
     background: rgba(251, 255, 229, 0.03);
 }
+
+.makerTagContainer {
+    bottom: -56px;
+    display: flex;
+    justify-content: center;
+    padding: 12px;
+    width: 100%;
+}
+
+.makerTag {
+    border-radius: 32px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px;
+    /*text styling*/
+    color: rgba(229, 241, 169, 0.50);
+    text-align: center;
+    font-family: Quicksand;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+a {
+    color: rgba(229, 241, 169, 0.50);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
