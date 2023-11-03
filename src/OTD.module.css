@@ -37,6 +37,7 @@
 .imageContainer:hover {
     transform: translateY(-3px) rotate(-.5deg);
     scale: 1.01;
+    cursor: pointer;
 }
 
 .tint {
