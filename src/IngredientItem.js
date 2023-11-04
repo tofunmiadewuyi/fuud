@@ -5,7 +5,7 @@ function IngredientItem(props) {
   return (
     <div className={styles.ingredientItem}>
         <img className={styles.ingredientImage} src={`https://${props.image}`} alt=''/>
-        <p>{props.name}</p>
+        <p>{props.measurement} {props.name}</p>
     </div>
   )
 }

@@ -20,6 +20,10 @@
     flex: 1;
 }
 
+.logo:hover {
+    cursor: pointer;
+}
+
 .user-container {
     flex: 1;
     display: flex;

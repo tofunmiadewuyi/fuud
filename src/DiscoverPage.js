@@ -10,8 +10,8 @@ class DiscoverPage extends Component {
          discoverBy: this.props.discoverItem.tabName,
          currentItem: this.props.discoverItem.itemName,
          discoverMealOTD: {
-            name: 'Beeffsss',
-            image: `url(${process.env.PUBLIC_URL}/images/dessertimage.png)`
+            name: 'Suggested',
+            image: ``
          },
          filterBy: '',
          url: this.props.discoverItem.url,
@@ -98,7 +98,7 @@ class DiscoverPage extends Component {
         <div className={styles.content}>
             <div className={styles.itemSuggested}>
               <h3 className={styles.h3}>Suggested for you</h3>
-              <div className={styles.itemSuggestedImage} style={mealOTDImage}>
+              <div className={styles.itemSuggestedImage} style={mealOTDImage} onClick={() => this.props.openMealDetails(this.state.discoverMealOTD)}>
                <div className={styles.tint}>
                   <p>{this.state.discoverMealOTD.name}</p>
                </div>
@@ -107,7 +107,7 @@ class DiscoverPage extends Component {
             <div className={styles.itemResults}>
               { this.state.discoverResults != null ? 
                   this.state.discoverResults.map(item => {
-                  return <DiscoverPageItem key={item.idMeal} name={item.strMeal} image={item.strMealThumb}/>
+                  return <DiscoverPageItem key={item.idMeal} name={item.strMeal} image={item.strMealThumb} openMealDetails={this.props.openMealDetails}/>
                   })  : "Loading..."
               }
             </div>

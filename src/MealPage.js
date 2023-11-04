@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styles from './MealPage.module.css'
 import favIcon from './icons/save.svg';
+import favFilled from './icons/save-filled.svg';
 import youtube from './icons/youtube.svg'
 import IngredientItem from './IngredientItem';
 
@@ -16,19 +17,16 @@ class MealPage extends Component {
         mealImage: '',
         mealYoutube: '',
         mealInstructions: '',
-        mealIngredients: []
+        mealIngredients: [],
+        mealIsSaved: false
       }
     }
 
-    splitText = () => {
-        const text = this.state.mealInstructions
-
-        const sentences = text.split(". ");
-
-        sentences.forEach(sentence => {
-            console.log(sentence)
-        })
-    }
+    handlePillClick = (itemName, tab) => {
+      console.log('pill clicked', itemName, tab)
+      this.props.passDiscoverItem(itemName, tab)
+      this.props.changePage('Discover')
+    }  
 
     getMealSelected = async (url) => {
       fetch(url)
@@ -154,32 +152,62 @@ class MealPage extends Component {
             })
           }
         })
+        .then(() => {
+          this.getSavedInfo()
+        })
+        .catch(err => {
+          console.log('there was an error fetching')
+        })
 
-        console.log('gotten meals')
     }
 
-    getNumberOfIngredients = () => {
-      const allIngredients = this.state.mealIngredients.filter(ing => ing.name !== '')
-      // console.log(allIngredients)
-
-      this.setState({
-        mealIngredientNumber: allIngredients.length
-      })
-      console.log('gotten meal number')
+    getSavedInfo = () => {
+      const savedItems = JSON.parse(localStorage.getItem('saved'))
+      const meal = {
+        image: `url("${this.state.mealImage}")`,
+        name: this.state.mealName,
+        desc: '',
+        area: this.state.mealCountry,
+        category: this.state.mealCategory,
+      }
+      const isItemSaved = savedItems.some(item => JSON.stringify(item) === JSON.stringify(meal))
+      if (isItemSaved) {
+        this.setState({
+          mealIsSaved: true
+        })
+      }
     }
 
-    getPageDetails = async () => {
-      await this.getMealSelected(this.state.mealUrl);
-      this.getNumberOfIngredients();
+    handleSaveClick = (event) => {
+      event.stopPropagation();
+      const meal = {
+        image: `url("${this.state.mealImage}")`,
+        name: this.state.mealName,
+        desc: '',
+        area: this.state.mealCountry,
+        category: this.state.mealCategory,
+      }
+      if (!this.state.mealIsSaved) {
+        this.props.handleSaveClick(meal, 'add')
+        this.setState({
+          mealIsSaved: true
+        })
+        console.log('meal saved')
+      } else {
+        this.props.handleSaveClick(meal, 'remove')
+        this.setState({
+          mealIsSaved: false
+        })
+        console.log('meal removed')
+      }
     }
+
 
     componentDidMount() {
-        // this.splitText()
-        // this.getMealSelected(this.state.mealUrl)
-        // this.getNumberOfIngredients()
-        this.getPageDetails()
+        this.getMealSelected(this.state.mealUrl);
 
     }
+
 
     
   render() {
@@ -194,7 +222,7 @@ class MealPage extends Component {
       <div className={styles.page}>
         <div className={styles.header}>
           <div className={styles.breadcrumbs}>
-            <span onClick={this.props.toDashboard}>
+            <span className={styles['breadcrumbs-home']} onClick={this.props.toDashboard}>
               Home
               </span> / {this.state.mealName}
             </div>
@@ -204,22 +232,24 @@ class MealPage extends Component {
             <div className={styles.mealImage} style={backgroundImage}>
                 <div className={styles.mealTint}>
                     <div className={styles.mealPills}>
-                        <div className={styles.mealPill}>{this.state.mealCountry}</div>
-                        <div className={styles.mealPill}>{this.state.mealCategory}</div>
+                        <div className={styles.mealPill} onClick={() => this.handlePillClick(this.state.mealCountry, 'Countries')}>
+                          {this.state.mealCountry}
+                        </div>
+                        <div className={styles.mealPill} onClick={() => this.handlePillClick(this.state.mealCategory, 'Categories')}>
+                          {this.state.mealCategory}
+                        </div>
                     </div>
                 </div>
-                <div className={styles.fav}>
-                    <img src={favIcon} alt="favorites-icon" />
+                <div className={styles.fav} onClick={this.handleSaveClick}>
+                    <img src={this.state.mealIsSaved ? favFilled : favIcon} alt="favorites-icon" />
                 </div>
             </div>
             <div className={styles.ingredients}>
-                <h3 className={styles.h3}>Ingredients
-                ({this.state.mealIngredientNumber})
-                </h3>
+                <h3 className={styles.h3}>Ingredients</h3>
                 <div className={styles.ingredientContent}>
                     {this.state.mealIngredients.map((ingredient, index) => {
-                      if (ingredient.name !== '') {
-                        return <IngredientItem key={index} name={ingredient.name} image={ingredient.image}/>
+                      if (ingredient.name !== '' && ingredient.name != null) {
+                        return <IngredientItem key={index} name={ingredient.name} image={ingredient.image} measurement={ingredient.measurement}/>
                       }
                     })}
                 </div>

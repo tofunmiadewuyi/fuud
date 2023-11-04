@@ -12,8 +12,8 @@ function Landing() {
   function handleClick() {
     if (inputRef.current != null && inputRef.current.value.trim() !== '') {
       const user = inputRef.current.value
-      const userData  = {name: user}
-      navigate('/dashboard', {state: {userData}})
+      localStorage.setItem('user', user)
+      navigate('/dashboard')
     }
   }
 

@@ -3,6 +3,7 @@ import styles from './App.module.css';
 import OTD from './OTD';
 import randomIcon from './icons/randomize.svg';
 import favIcon from './icons/save.svg';
+import favFilled from './icons/save-filled.svg';
 import DiscoverItem from './DiscoverItem';
 import Tabs from './Tabs';
 
@@ -13,7 +14,7 @@ function DashboardPage(props) {
   const [categoryOTD, setCategoryOTD] = useState({});
   const [currentTab, setCurrentTab] = useState('Categories');
   const [discoverData, setDiscoverData] = useState([]);
-
+  const [randomMealIsSaved, setRandomMealIsSaved] = useState(false)
 
 
   useEffect(() => {
@@ -94,7 +95,6 @@ function DashboardPage(props) {
           categoryName: parsedCategoryOTD.category.strCategory,
           categoryImage: parsedCategoryOTD.category.strCategoryThumb,
         })
-        console.log(parsedCategoryOTD)
       } else {
         fetchCategoryOTD()
       }
@@ -134,15 +134,6 @@ function DashboardPage(props) {
     }
   }
 
-  const changeTab = (changeTo) => {
-    setCurrentTab(changeTo);
-    fetchTabItems(changeTo);
-  };
-
-  const handleRandomButtonClick = () => {
-    fetchRandom();
-  };
-
   const fetchTabItems = (category) => {
     if (category === 'Categories') {
       fetchCategories();
@@ -175,6 +166,7 @@ function DashboardPage(props) {
             area: meal.strArea,
             category: meal.strCategory,
           });
+          setRandomMealIsSaved(false)
         })
         .catch((error) => {
           console.error('From-Tofs, An error occurred:', error);
@@ -257,6 +249,28 @@ function DashboardPage(props) {
     props.openMealDetails(mealOTD)
   }
 
+  const handleRandomButtonClick = () => {
+    fetchRandom();
+  };
+
+  const handleRandomSaveClick = (event) => {
+    event.stopPropagation();
+    if (!randomMealIsSaved) {
+      props.handleSaveClick(randomMeal, 'add')
+      setRandomMealIsSaved(true)
+      console.log('meal saved')
+    } else {
+      props.handleSaveClick(randomMeal, 'remove')
+      setRandomMealIsSaved(false)
+      console.log('meal removed')
+    }
+  }
+
+  const changeTab = (changeTo) => {
+    setCurrentTab(changeTo);
+    fetchTabItems(changeTo);
+  };
+
   const backgroundImage = {
     backgroundImage: `${randomMeal.image}`,
     backgroundSize: 'cover',
@@ -284,8 +298,8 @@ function DashboardPage(props) {
               <div className={styles.randomMealPill}>{randomMeal.category}</div>
             </div>
           </div>
-          <div className={styles.fav}>
-            <img src={favIcon} alt="favorites-icon" />
+          <div className={styles.fav} onClick={handleRandomSaveClick}>
+            <img src={randomMealIsSaved ? favFilled : favIcon} alt="favorites-icon" />
           </div>
         </div>
       </div>

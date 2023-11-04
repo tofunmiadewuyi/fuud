@@ -1,26 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import DashboardPage from './DashboardPage';
 import DiscoverPage from './DiscoverPage';
-
-import { useLocation } from 'react-router-dom';
 import TopBar from './TopBar';
 import MealPage from './MealPage';
 import MakerTag from './MakerTag';
+import SavedRecipes from './SavedRecipes';
 
 function App() {
-  const [user, setUser] = useState('');
   const [isShowing, setIsShowing] = useState('Dashboard')
   const [discoverItemSelected, setDiscoverItemSelected] = useState({itemName: '', tabName: '', url: ''})
   const [mealSelected, setMealSelected] = useState()
 
-  //getting user data from Landing
-  const { state } = useLocation();
-  const { userData } = state;
-
 
   useEffect(() => {
-    setUser(userData.name)
-  }, [userData.name, discoverItemSelected]);
+  }, [discoverItemSelected]);
+
 
   const backtoDashboard = () => {
     setIsShowing('Dashboard')
@@ -65,25 +59,50 @@ function App() {
 
   }
 
+  const handleSaveClick = (meal, type) => {
+    const savedItems = JSON.parse(localStorage.getItem('saved')) || [];
+    const itemExists = savedItems.some(item => JSON.stringify(item) === JSON.stringify(meal))
+
+
+    if (type === 'add' && !itemExists) {
+      savedItems.push(meal)
+      localStorage.setItem('saved', JSON.stringify(savedItems));
+    } else if (type === 'remove' && itemExists) {
+      const newArray = savedItems.filter(item => item.name !== meal.name)
+      localStorage.setItem('saved', JSON.stringify(newArray));
+    } else {
+      console.error('From 7, there was an issue adding or removing this meal to/from the saved list')
+    }
+
+  }
+
 
   return (
     <>
-      <TopBar user={user}/>
+      <TopBar changePage={changePage}/>
       { isShowing === 'Dashboard' ? 
         <DashboardPage 
         changePage={changePage} 
         passDiscoverItem={passDiscoverItem}
-        openMealDetails={openMealDetails}/> 
+        openMealDetails={openMealDetails}
+        handleSaveClick={handleSaveClick}/> 
         : <></>}
       { isShowing === 'Discover' & discoverItemSelected.itemName !== ''? 
         <DiscoverPage 
         discoverItem={discoverItemSelected}
-        toDashboard={backtoDashboard}/> 
+        toDashboard={backtoDashboard}
+        openMealDetails={openMealDetails}/> 
         : <></>}
       { isShowing === 'Meal' ?
         <MealPage 
         meal={mealSelected}
-        toDashboard={backtoDashboard}/> 
+        toDashboard={backtoDashboard}
+        changePage={changePage} 
+        passDiscoverItem={passDiscoverItem}
+        handleSaveClick={handleSaveClick}/> 
+        : <></>}
+        { isShowing === 'Recipes' ?
+        <SavedRecipes openMealDetails={openMealDetails}/>
         : <></>}
       <MakerTag/>
     </>

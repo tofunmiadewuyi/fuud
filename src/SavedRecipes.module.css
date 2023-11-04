@@ -1,0 +1,124 @@
+
+
+.page {
+    margin-top: 64px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 56px 40px;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+}
+
+.header h3 {
+    font-family: 'Agbalumo', 'sans-serif';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.header p {
+    color: rgba(229, 241, 169, 0.60);
+    font-family: 'Quicksand', 'sans-serif';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 133.333% */
+}
+
+.body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.recipe-item {
+    display: flex;
+    width: calc((100% / 3) - 28.22px);
+    height: 96px;
+    border-radius: 24px;
+    transition: all 0.1s ease-in;
+}
+
+.recipe-item:hover {
+    cursor: pointer;
+    background: rgba(168, 207, 56, 0.05);
+    transform: translateY(-1px);
+}
+
+.recipe-item-image {
+    width: 96px;
+    height: 100%;
+    border-radius: 24px;
+    background-color: blueviolet;
+}
+
+.recipe-item-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px;
+    flex: 1;
+    align-items: center;
+}
+
+.recipe-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.recipe-details p {
+    font-family: 'Quicksand', 'sans-serif';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.pillGroup {
+    display: flex;
+    gap: 8px;
+}
+
+.pill {
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 20px;
+    background: rgba(168, 207, 56, 0.10);
+    backdrop-filter: blur(3px);
+    /*text styling*/
+    color: #A8CF38;
+    text-align: center;
+    font-family: Quicksand;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
+
+.recipe-delete-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out
+}
+
+.recipe-delete-icon:hover {
+    border-radius: 12px;
+    background: rgba(195, 78, 27, 0.20);
+    cursor: pointer;
+    transform: translateY(-2px);
+}
+
