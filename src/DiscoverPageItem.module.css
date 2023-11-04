@@ -3,7 +3,8 @@
 }
 
 .container:hover {
-    color: #A8CF38;;
+    color: #A8CF38;
+    cursor: pointer;
 }
 
 .itemImage {

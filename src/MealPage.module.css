@@ -38,13 +38,23 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    
 }
 
 .breadcrumbs span {
     opacity: 0.5;
 }
 
-.breadcrumbs:hover span {
+.breadcrumbs-home:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* .breadcrumbs-discover {
+    opacity: 0.5;
+} */
+
+.breadcrumbs-discover:hover {
     text-decoration: underline;
     cursor: pointer;
 }
@@ -66,7 +76,7 @@
 }
 
 .mealImage:hover {
-    transform: translateY(-3px) rotate(1deg);
+    transform: translateY(-1px) ;
     scale: 1.01;
 }
 
@@ -79,6 +89,10 @@
     flex-direction: column;
     gap: 8px;
     justify-content: flex-end;
+}
+
+.mealTint:hover {
+    background: rgba(9, 14, 1, 0.40);
 }
 
 
@@ -105,18 +119,25 @@
     padding: 8px;
     border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 20px;
-    background: rgba(168, 207, 56, 0.20);
-    backdrop-filter: blur(2px);
+    background: rgba(168, 207, 56, 0.10);
+    backdrop-filter: blur(3px);
     /*text styling*/
-    color: #A8CF38;
+    color: #E5F1A9;
     text-align: center;
     font-family: Quicksand;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    transition: all 0.1s ease-out;
 }
 
+.mealPill:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
+    background: rgba(168, 207, 56, 0.30);
+    font-weight: 700;
+}
 .fav {
     position: absolute;
     top: 24px;
@@ -132,6 +153,7 @@
 .fav:hover {
     background: rgba(229, 241, 169, 0.50);
     scale: 1.03;
+    cursor: pointer;
 }
 
 .ingredients {
@@ -181,11 +203,12 @@
     gap: 8px;
     padding: 12px;
     width: 310px;
-    height: fit-content;
+    height: 120px;
     box-sizing: border-box;
     border-radius: 12px;
     border: 1px solid rgba(229, 241, 169, 0.07);
     position: sticky;
+    background-color: rgba(168, 207, 56, 0.10);
 }
 
 .youtube img {
