@@ -207,6 +207,9 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    /* background-color: red; */
+    height: 100%;
+    /* flex: 1; */
 }
 
 .discover-body p {
@@ -223,6 +226,8 @@
     flex-direction: column;
     gap: 20px;
     max-height: 480px;
+    height: 100%;
+    flex: 1;
     overflow-y: scroll;
 }
 

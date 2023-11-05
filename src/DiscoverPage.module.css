@@ -15,7 +15,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 40px;
-    height: calc(100vh - 160px);
+    height: calc(100vh - 200px);
     padding: 56px 40px;
 }
 
