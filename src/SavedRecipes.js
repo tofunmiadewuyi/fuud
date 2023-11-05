@@ -19,14 +19,14 @@ function SavedRecipes(props) {
        })
     }
 
-    console.log(savedRecipes.recipes)
-
-
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h3>Saved Recipes</h3>
-        <p>({savedRecipes.recipes.length})</p>
+        <div className={styles.breadcrumbs} onClick={props.toDashboard}>Home</div>
+        <div className={styles['header-title']}>
+          <h3>Saved Recipes</h3>
+          <p>({savedRecipes.recipes.length})</p>
+        </div>
       </div>
       <div className={styles.body}>
         {savedRecipes.recipes.map(recipe => {

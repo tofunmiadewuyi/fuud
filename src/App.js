@@ -51,9 +51,9 @@ function App() {
     const encodedMealName = encodeURIComponent(mealName)
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodedMealName}`
 
-    setMealSelected({
-      url: url
-    })
+    setMealSelected(
+       url
+    )
 
     changePage('Meal')
 
@@ -79,7 +79,7 @@ function App() {
 
   return (
     <>
-      <TopBar changePage={changePage}/>
+      <TopBar changePage={changePage} openMealDetails={openMealDetails}/>
       { isShowing === 'Dashboard' ? 
         <DashboardPage 
         changePage={changePage} 
@@ -102,7 +102,9 @@ function App() {
         handleSaveClick={handleSaveClick}/> 
         : <></>}
         { isShowing === 'Recipes' ?
-        <SavedRecipes openMealDetails={openMealDetails}/>
+        <SavedRecipes 
+        openMealDetails={openMealDetails}
+        toDashboard={backtoDashboard}/>
         : <></>}
       <MakerTag/>
     </>

@@ -61,13 +61,15 @@
 .searchIcon {
     position: absolute;
     top: calc(50% - 10px);
-    right: calc(296px + 48px);
+    /* right: calc(360px + 48px); */
+    right: calc(360px - 20px - 12px);
 }
 
 .searchbar {
-    width: 296px;
+    width: 360px;
     height: 40px; 
     padding: 0px 40px;
+    box-sizing: border-box;
 }
 
 .menu {
@@ -107,7 +109,35 @@
     background: rgba(9, 14, 1, 0.10);
 }
 
-@keyframes SlideIn {
+.search-results-container {
+    position: absolute;
+    width: 360px;
+    min-height: 200px;
+    max-height: 320px;
+    top: 48px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    border: 1px solid rgba(251, 255, 229, 0.10);
+    background: rgba(168, 207, 56, 0.20);
+    box-shadow: 0px 2px 6px 1px rgba(229, 241, 169, 0.20);
+    backdrop-filter: blur(6px);
+    overflow-y: scroll;
+  }
+
+  .search-result-item {
+
+    padding: 16px;
+    border-bottom: 1px solid rgba(251, 255, 229, 0.10);
+  }
+
+  .search-result-item:hover {
+    background-color: rgba(251, 255, 229, 0.10);
+    cursor: pointer;
+  }
+
+
+  @keyframes SlideIn {
     from {
       opacity: 0;
       transform: translateY(-50px);

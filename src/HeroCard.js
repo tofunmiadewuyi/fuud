@@ -22,6 +22,7 @@ function HeroCard(props) {
         <div className={styles.content}>
             <h3 className={styles.h3}>{props.title}</h3>
             <p className={styles.p}>{props.body}</p>
+            <span/> <span/>
         </div>
       </div>
     </div>

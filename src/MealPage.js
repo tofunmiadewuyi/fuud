@@ -10,7 +10,7 @@ class MealPage extends Component {
       super(props)
     
       this.state = {
-        mealUrl: this.props.meal.url,
+        mealUrl: this.props.meal,
         mealName: '',
         mealCountry: '',
         mealCategory: '',
@@ -28,7 +28,7 @@ class MealPage extends Component {
       this.props.changePage('Discover')
     }  
 
-    getMealSelected = async (url) => {
+    getMealSelected = (url) => {
       fetch(url)
         .then(res => {
           if (!res.ok) {
@@ -202,12 +202,25 @@ class MealPage extends Component {
       }
     }
 
+    updateMealUrl = () => {
+      if (this.props.meal !== this.state.mealUrl) {
+        this.getMealSelected(this.props.meal)
+        this.setState({
+          mealUrl: this.props.meal
+        })
+      }
+    }
+
 
     componentDidMount() {
         this.getMealSelected(this.state.mealUrl);
-
+        console.log(this.state.mealUrl)
+        
     }
 
+    componentDidUpdate() {
+      this.updateMealUrl()
+    }
 
     
   render() {
