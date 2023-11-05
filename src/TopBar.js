@@ -8,16 +8,25 @@ import chevron from './icons/chevrondown.svg';
 import saved from './icons/saved.svg';
 import about from './icons/about.svg';
 import logout from './icons/logout.svg';
+import SearchResultItem from './SearchResultItem';
 
 const TopBar = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(localStorage.getItem('user') || 'User');
+  const [searchValue, setSearchValue] = useState(localStorage.getItem('searchValue') || '');
+  const [isSearchTrayOpen, setIsSearchTrayOpen] = useState(false)
+  const [searchUrl, setSearchUrl] = useState()
+  const [searchResults, setSearchResults] = useState([])
   const menuRef = useRef(null);
+  const searchResultsRef = useRef(null);
   const navigate = useNavigate();
 
   const handleDocumentClick = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
       setIsMenuOpen(false);
+    }
+    if (searchResultsRef.current && !searchResultsRef.current.contains(event.target)) {
+      setIsSearchTrayOpen(false)
     }
   };
 
@@ -34,12 +43,46 @@ const TopBar = (props) => {
     navigate('/')
   }
 
+  const handleSearch = (value) => {
+    console.log(value)
+    if (value !== '' && value) {
+      setSearchUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(value.trim())}`);
+      fetchResults()
+    }
+
+  }
+
+  const fetchResults = () => {
+    fetch(searchUrl)
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('From 7, Network request could not be completed')
+      }
+      if (!res.headers.get('content-type')?.includes('application/json')) {
+        throw new Error('Response is not in JSON format');
+      }
+      return res.json()
+    })
+    .then(data => {
+      setSearchResults(data.meals)
+    })
+    .catch(err => {
+      console.error('From 7', err)
+    })
+  }
+
   useEffect(() => {
+    if (searchValue !== undefined) {
+      handleSearch(searchValue)
+    }
+    localStorage.setItem('searchValue', searchValue);
+    console.log(searchResults)
+
     document.addEventListener('mousedown', handleDocumentClick);
     return () => {
       document.removeEventListener('mousedown', handleDocumentClick);
     };
-  }, []);
+  }, [searchValue]);
 
   return (
     <div className={styles.container}>
@@ -55,7 +98,21 @@ const TopBar = (props) => {
       </div>
       <div className={styles.searchbarContainer}>
         <img className={styles.searchIcon} src={searchIcon} alt="search-icon" />
-        <input className={styles.searchbar} type="text" placeholder="Search for a meal" />
+        <input 
+          className={styles.searchbar} 
+          value={searchValue}
+          onFocus={() => setIsSearchTrayOpen(true)}
+          onChange={e => setSearchValue(e.target.value)}
+          type="text" 
+          placeholder="Search for a meal" />
+          { isSearchTrayOpen ? 
+            <div className={styles['search-results-container']} ref={searchResultsRef}>
+            {searchResults !== null && searchResults.length > 0 ? 
+            searchResults.map(result => {
+            return <SearchResultItem key={result.idMeal} result={result} openMealDetails={props.openMealDetails}/>
+            })
+            : <p style={{opacity: 0.5, textAlign: 'center', margin: 'auto auto'}}>Type to search</p>}
+            </div> : <></>}
       </div>
       <div ref={menuRef}>
         {isMenuOpen ? (

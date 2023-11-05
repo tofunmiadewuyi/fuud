@@ -266,6 +266,11 @@ function DashboardPage(props) {
     }
   }
 
+  const handleRandomPillClick = (event, item, tab) => {
+    event.stopPropagation();
+    handleDiscoverClick(item, tab)
+  }
+
   const changeTab = (changeTo) => {
     setCurrentTab(changeTo);
     fetchTabItems(changeTo);
@@ -294,8 +299,8 @@ function DashboardPage(props) {
             <h3 className={styles.h3}>{randomMeal.name}</h3>
             <p>{randomMeal.desc}</p>
             <div className={styles.randomMealPills}>
-              <div className={styles.randomMealPill}>{randomMeal.area}</div>
-              <div className={styles.randomMealPill}>{randomMeal.category}</div>
+              <div className={styles.randomMealPill} onClick={(event) => handleRandomPillClick(event, randomMeal.area, 'Countries')}>{randomMeal.area}</div>
+              <div className={styles.randomMealPill}  onClick={(event) => handleRandomPillClick(event, randomMeal.category, 'Categories')}>{randomMeal.category}</div>
             </div>
           </div>
           <div className={styles.fav} onClick={handleRandomSaveClick}>
