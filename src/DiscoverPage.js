@@ -20,15 +20,11 @@ class DiscoverPage extends Component {
     }
 
     componentDidMount() {
-
       this.fetchData()
     }
 
 
     fetchData() {
-
-      console.log(this.state.url)
-
       try{
         fetch(this.state.url)
           .then(res => {
@@ -42,9 +38,10 @@ class DiscoverPage extends Component {
               discoverResults: data.meals,
               resultNumber: data.meals.length
             })
-
+            // this.getMealOTD()
+          })
+          .then(() => {
             this.getMealOTD()
-
           })
           .catch(error => {
             console.error('From 7:', error)
@@ -76,6 +73,7 @@ class DiscoverPage extends Component {
           console.log("new state image has been set:" + this.state.discoverMealOTD.image)
       }
     }
+    
     
   render() {
 
@@ -112,7 +110,6 @@ class DiscoverPage extends Component {
               }
             </div>
         </div>
-        <>{console.log(this.state.discoverBy, this.state.currentItem)}</>
       </div>
     )
   }
