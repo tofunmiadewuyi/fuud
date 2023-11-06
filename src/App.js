@@ -5,16 +5,35 @@ import TopBar from './TopBar';
 import MealPage from './MealPage';
 import MakerTag from './MakerTag';
 import SavedRecipes from './SavedRecipes';
+import MobileView from './MobileView';
+import ErrorBoundary from './ErrorBoundary';
+import AboutModal from './AboutModal';
 
 function App() {
   const [isShowing, setIsShowing] = useState('Dashboard')
   const [discoverItemSelected, setDiscoverItemSelected] = useState({itemName: '', tabName: '', url: ''})
   const [mealSelected, setMealSelected] = useState()
+  const [deviceAllowed, setDeviceAllowed] = useState(true)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
 
   useEffect(() => {
+    handleWindowResize()
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
   }, [discoverItemSelected]);
 
+  const handleWindowResize = () => {
+    if (window.innerWidth < 1280) {
+      console.log('Too small')
+      setDeviceAllowed(false)
+    } else {
+      setDeviceAllowed(true)
+    }
+  }
 
   const backtoDashboard = () => {
     setIsShowing('Dashboard')
@@ -76,37 +95,52 @@ function App() {
 
   }
 
+  const handleModal = () => {
+    if (isModalOpen) {
+      setIsModalOpen(false)
+    } else {
+      setIsModalOpen(true)
+    }
+  }
+
 
   return (
     <>
-      <TopBar changePage={changePage} openMealDetails={openMealDetails}/>
-      { isShowing === 'Dashboard' ? 
-        <DashboardPage 
-        changePage={changePage} 
-        passDiscoverItem={passDiscoverItem}
-        openMealDetails={openMealDetails}
-        handleSaveClick={handleSaveClick}/> 
-        : <></>}
-      { isShowing === 'Discover' & discoverItemSelected.itemName !== ''? 
-        <DiscoverPage 
-        discoverItem={discoverItemSelected}
-        toDashboard={backtoDashboard}
-        openMealDetails={openMealDetails}/> 
-        : <></>}
-      { isShowing === 'Meal' ?
-        <MealPage 
-        meal={mealSelected}
-        toDashboard={backtoDashboard}
-        changePage={changePage} 
-        passDiscoverItem={passDiscoverItem}
-        handleSaveClick={handleSaveClick}/> 
-        : <></>}
-        { isShowing === 'Recipes' ?
-        <SavedRecipes 
-        openMealDetails={openMealDetails}
-        toDashboard={backtoDashboard}/>
-        : <></>}
-      <MakerTag/>
+      
+        {deviceAllowed ? 
+        <>
+          <TopBar changePage={changePage} openMealDetails={openMealDetails} handleModal={handleModal}/>
+          {isModalOpen ? <AboutModal handleModal={handleModal}/> : <></>}
+        { isShowing === 'Dashboard' ? 
+          <DashboardPage 
+          changePage={changePage} 
+          passDiscoverItem={passDiscoverItem}
+          openMealDetails={openMealDetails}
+          handleSaveClick={handleSaveClick}/> 
+          : <></>}
+        { isShowing === 'Discover' & discoverItemSelected.itemName !== ''? 
+          <DiscoverPage 
+          discoverItem={discoverItemSelected}
+          toDashboard={backtoDashboard}
+          openMealDetails={openMealDetails}/> 
+          : <></>}
+        { isShowing === 'Meal' ?
+          <MealPage 
+          meal={mealSelected}
+          toDashboard={backtoDashboard}
+          changePage={changePage} 
+          passDiscoverItem={passDiscoverItem}
+          handleSaveClick={handleSaveClick}/> 
+          : <></>}
+          { isShowing === 'Recipes' ?
+          <SavedRecipes 
+          openMealDetails={openMealDetails}
+          toDashboard={backtoDashboard}/>
+          : <></>}
+        <MakerTag/>
+        </> : 
+        <><MobileView/></>}
+        
     </>
   );
 }

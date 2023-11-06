@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from './App';
 import Home from './Landing'
 import DiscoverPage from './DiscoverPage';
+import ErrorBoundary from './ErrorBoundary';
 
 const router = createBrowserRouter([
   {
@@ -13,14 +14,17 @@ const router = createBrowserRouter([
     element: <Home />
   },
   {
-    path: "dashboard",
-    element: <>
-              <App/>
-            </>
+    path: "app",
+    element: <App/>
+            
   },
   {
     path: "discover",
     element: <DiscoverPage/>
+  },
+  {
+    path: '*',
+    element: <ErrorBoundary/>
   }
 ]);
 

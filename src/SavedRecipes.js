@@ -25,13 +25,15 @@ function SavedRecipes(props) {
         <div className={styles.breadcrumbs} onClick={props.toDashboard}>Home</div>
         <div className={styles['header-title']}>
           <h3>Saved Recipes</h3>
-          <p>({savedRecipes.recipes.length})</p>
+          <p>({savedRecipes.recipes ? savedRecipes.recipes.length : '0'})</p>
         </div>
       </div>
       <div className={styles.body}>
-        {savedRecipes.recipes.map(recipe => {
+        { savedRecipes.recipes ? 
+        savedRecipes.recipes.map(recipe => {
             return <SavedRecipeItem key={recipe.name} recipe ={recipe} deleteRecipe={deleteRecipe} openMealDetails={props.openMealDetails}/>
-        })}
+        })
+      : "No saved recipes yet."}
       </div>
     </div>
   )
