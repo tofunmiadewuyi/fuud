@@ -20,7 +20,7 @@ function AboutModal(props) {
                 <div className={styles['close-icon']} onClick={props.handleModal}><img src={close} alt='close-icon'/></div>
             </div>
             <div className={styles.body}>
-                <p>Fuud is a practice app created by Tofunmi Adewuyi in Nov, 2023.</p>
+                <p>Fuud is a practice app created by <a href="https://www.tofunmiadewuyi.com">Tofunmi Adewuyi</a> in Nov, 2023.</p>
                 <p>This app was built around the API from <a href='https://www.themealdb.com/' target='_blank'>TheMealDB.com</a></p>
             </div>
        </div>

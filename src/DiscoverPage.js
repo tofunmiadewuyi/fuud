@@ -39,9 +39,10 @@ class DiscoverPage extends Component {
               resultNumber: data.meals.length
             })
             // this.getMealOTD()
+            return data.meals
           })
-          .then(() => {
-            this.getMealOTD()
+          .then((data) => {
+            this.getMealOTD(data)
           })
           .catch(error => {
             console.error('From 7:', error)
@@ -53,25 +54,17 @@ class DiscoverPage extends Component {
 
     }
 
-    getMealOTD() {
-      if (this.state.discoverResults != null) {
-          const results = this.state.discoverResults
+    getMealOTD(data) {
+
           const min = 0;
-          const max = results.length
-    
+          const max = data.length
           const randomCategoryIndex = Math.floor(Math.random() * (max - min) )
-          const meal = results[randomCategoryIndex]
-    
+          const meal = data[randomCategoryIndex]
+
           this.setState({
-            discoverMealOTD: {
-              name: meal.strMeal,
-              image: `url(${meal.strMealThumb})`
-            }
+            discoverMealOTD: {name: meal.strMeal, image: `url(${meal.strMealThumb})`}
           })
 
-
-          console.log("new state image has been set:" + this.state.discoverMealOTD.image)
-      }
     }
     
     
