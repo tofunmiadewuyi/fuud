@@ -258,11 +258,9 @@ function DashboardPage(props) {
     if (!randomMealIsSaved) {
       props.handleSaveClick(randomMeal, 'add')
       setRandomMealIsSaved(true)
-      console.log('meal saved')
     } else {
       props.handleSaveClick(randomMeal, 'remove')
       setRandomMealIsSaved(false)
-      console.log('meal removed')
     }
   }
 

@@ -1,0 +1,66 @@
+.modal {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(3px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 120px;
+    box-sizing: border-box;
+}
+
+.modal-container {
+    display: flex;
+    width: 320px;
+    
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    border-radius: 12px;
+    border: 1px solid rgba(251, 255, 229, 0.10);
+    background: rgba(168, 207, 56, 0.30);
+    box-shadow: 0px 2px 6px 1px rgba(229, 241, 169, 0.0);
+    backdrop-filter: blur(6px);
+    padding: 16px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-self: stretch;
+}
+
+.close-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out
+}
+
+.close-icon:hover {
+    border-radius: 12px;
+    background: rgba(195, 78, 27, 0.20);
+    cursor: pointer;
+    transform: translateY(-2px);
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px; 
+    padding-top: 8px;
+}
+
+.body :last-child {
+    opacity: 0.7;
+}

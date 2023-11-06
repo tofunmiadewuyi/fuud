@@ -43,6 +43,11 @@ const TopBar = (props) => {
     navigate('/')
   }
 
+  const handleLogout = () => {
+    localStorage.clear();
+    goToLanding()
+  }
+
   const handleSearch = (value) => {
     console.log(value)
     if (value !== '' && value) {
@@ -50,6 +55,11 @@ const TopBar = (props) => {
       fetchResults()
     }
 
+  }
+
+  const openModal = () => {
+    props.handleModal()
+    setIsMenuOpen(false)
   }
 
   const fetchResults = () => {
@@ -76,7 +86,6 @@ const TopBar = (props) => {
       handleSearch(searchValue)
     }
     localStorage.setItem('searchValue', searchValue);
-    console.log(searchResults)
 
     document.addEventListener('mousedown', handleDocumentClick);
     return () => {
@@ -121,12 +130,12 @@ const TopBar = (props) => {
               <img src={saved} alt="saved-icon" />
               Saved recipes
             </div>
-            <div className={styles.menuOption}>
+            <div className={styles.menuOption} onClick={openModal}>
               <img src={about} alt="about-icon" />
               About
             </div>
             <span className={styles.divider}></span>
-            <div className={styles.menuOption} onClick={goToLanding}>
+            <div className={styles.menuOption} onClick={handleLogout}>
               <img src={logout} alt="logout-icon" />
               Log out
             </div>
