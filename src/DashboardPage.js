@@ -327,16 +327,18 @@ function DashboardPage(props) {
         <div className={styles['discover-body']}>
           <p>{discoverData != null ? discoverData.length : 'Loading'} results</p>
           <div className={styles['discover-items']}>
-            {discoverData != null ? (
-              discoverData.map((item, index) => {
-                return <DiscoverItem onclick={() => 
-                  handleDiscoverClick(item.strCategory || item.strArea || item.strIngredient, currentTab)} 
-                  key={index} 
-                  name={item.strCategory || item.strArea || item.strIngredient} />;
-              })
-            ) : (
-              <p></p>
-            )}
+
+              {discoverData != null ? (
+                discoverData.map((item, index) => {
+                  return <DiscoverItem onclick={() => 
+                    handleDiscoverClick(item.strCategory || item.strArea || item.strIngredient, currentTab)} 
+                    key={index} 
+                    name={item.strCategory || item.strArea || item.strIngredient} />;
+                })
+              ) : (
+                <p></p>
+              )}
+           
           </div>
         </div>
       </div>

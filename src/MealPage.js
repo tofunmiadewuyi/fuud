@@ -151,8 +151,10 @@ class MealPage extends Component {
               ]
             })
           }
+          return data.meals[0]
         })
-        .then(() => {
+        .then((meal) => {
+          this.numberOfIngredients(meal)
           this.getSavedInfo()
         })
         .catch(err => {
@@ -162,7 +164,6 @@ class MealPage extends Component {
     }
 
     getSavedInfo = () => {
-      const savedItems = JSON.parse(localStorage.getItem('saved'))
       const meal = {
         image: `url("${this.state.mealImage}")`,
         name: this.state.mealName,
@@ -170,6 +171,7 @@ class MealPage extends Component {
         area: this.state.mealCountry,
         category: this.state.mealCategory,
       }
+      const savedItems = JSON.parse(localStorage.getItem('saved'))
       const isItemSaved = savedItems.some(item => JSON.stringify(item) === JSON.stringify(meal))
       if (isItemSaved) {
         this.setState({
@@ -202,6 +204,23 @@ class MealPage extends Component {
       }
     }
 
+    numberOfIngredients = (meal) => {
+      let count = 0
+      for (let i = 0; i <= 20; i++) {
+        const ingredient = meal[`strIngredient${i}`]
+        if (ingredient != null & ingredient !== '') {
+          count++;
+        }
+      }
+      this.setState({
+        numberOfIngredients: count
+      })
+    }
+
+    componentDidMount() {
+        this.getMealSelected(this.state.mealUrl); 
+    }
+
     updateMealUrl = () => {
       if (this.props.meal !== this.state.mealUrl) {
         this.getMealSelected(this.props.meal)
@@ -211,13 +230,6 @@ class MealPage extends Component {
       }
     }
 
-
-    componentDidMount() {
-        this.getMealSelected(this.state.mealUrl);
-        console.log(this.state.mealUrl)
-        
-    }
-
     componentDidUpdate() {
       this.updateMealUrl()
     }
@@ -225,7 +237,6 @@ class MealPage extends Component {
     
   render() {
     
-
     const backgroundImage = {
         backgroundImage: `url(${this.state.mealImage})`,
         backgroundSize: 'cover',
@@ -258,7 +269,7 @@ class MealPage extends Component {
                 </div>
             </div>
             <div className={styles.ingredients}>
-                <h3 className={styles.h3}>Ingredients</h3>
+                <h3 className={styles.h3}>Ingredients ({this.state.numberOfIngredients})</h3>
                 <div className={styles.ingredientContent}>
                     {this.state.mealIngredients.map((ingredient, index) => {
                       if (ingredient.name !== '' && ingredient.name != null) {

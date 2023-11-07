@@ -23,14 +23,6 @@
     max-width: 310px;
 }
 
-.discover {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    flex: 1;
-    max-width: 428px;
-    text-align: left;
-}
 
 .h3 {
     color: #FBFFE5;
@@ -203,6 +195,15 @@
     scale: 1.03;
 }
 
+.discover {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    min-width: 400px;
+    max-width: 428px;
+    text-align: left;
+}
+
 .discover-header {
     display: flex;
     flex-direction: column;
@@ -213,9 +214,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    /* background-color: red; */
-    height: 100%;
-    /* flex: 1; */
+    flex: 1;
 }
 
 .discover-body p {
@@ -231,10 +230,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    max-height: 480px;
-    height: 100%;
-    flex: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
+    max-height: calc(100vh - 335px);
 }
 
 .discover-item {

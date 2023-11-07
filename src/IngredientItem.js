@@ -5,7 +5,10 @@ function IngredientItem(props) {
   return (
     <div className={styles.ingredientItem}>
         <img className={styles.ingredientImage} src={`https://${props.image}`} alt=''/>
-        <p>{props.measurement} {props.name}</p>
+        <div>
+          <p>{props.name}</p>
+          <p style={{fontSize: '13px', opacity: '0.7'}}>{props.measurement}</p>
+        </div>
     </div>
   )
 }

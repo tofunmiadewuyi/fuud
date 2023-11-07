@@ -15,7 +15,6 @@
 .modal-container {
     display: flex;
     width: 320px;
-    
     flex-direction: column;
     gap: 16px;
     align-items: center;

@@ -13,12 +13,22 @@ import SearchResultItem from './SearchResultItem';
 const TopBar = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(localStorage.getItem('user') || 'User');
+  const [searchValue, setSearchValue] = useState(localStorage.getItem('searchValue') || '');
   const [isSearchTrayOpen, setIsSearchTrayOpen] = useState(false)
+  const [searchUrl, setSearchUrl] = useState()
   const [searchResults, setSearchResults] = useState([])
   const menuRef = useRef(null);
   const searchResultsRef = useRef(null);
   const navigate = useNavigate();
 
+  const handleDocumentClick = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsMenuOpen(false);
+    }
+    if (searchResultsRef.current && !searchResultsRef.current.contains(event.target)) {
+      setIsSearchTrayOpen(false)
+    }
+  };
 
   const handleClick = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -38,53 +48,50 @@ const TopBar = (props) => {
     goToLanding()
   }
 
+  const handleSearch = (value) => {
+    console.log(value)
+    if (value !== '' && value) {
+      setSearchUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(value.trim())}`);
+      fetchResults()
+    }
+
+  }
+
   const openModal = () => {
     props.handleModal()
     setIsMenuOpen(false)
   }
 
-  const handleDocumentClick = (event) => {
-    if (menuRef.current && !menuRef.current.contains(event.target)) {
-      setIsMenuOpen(false);
-    }
-    if (searchResultsRef.current && !searchResultsRef.current.contains(event.target)) {
-      setIsSearchTrayOpen(false)
-    }
-  };
+  const fetchResults = () => {
+    fetch(searchUrl)
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('From 7, Network request could not be completed')
+      }
+      if (!res.headers.get('content-type')?.includes('application/json')) {
+        throw new Error('Response is not in JSON format');
+      }
+      return res.json()
+    })
+    .then(data => {
+      setSearchResults(data.meals)
+    })
+    .catch(err => {
+      console.error('From 7', err)
+    })
+  }
 
   useEffect(() => {
+    if (searchValue !== undefined) {
+      handleSearch(searchValue)
+    }
+    localStorage.setItem('searchValue', searchValue);
+
     document.addEventListener('mousedown', handleDocumentClick);
     return () => {
       document.removeEventListener('mousedown', handleDocumentClick);
     };
-  }, []);
-
-  const [searchValue, setSearchValue] = useState('');
-  useEffect(() => {
-     const handleSearch = (value) => {
-      const toSearch = encodeURIComponent(value.trim())
-      // if (value !== '' && value) { }
-      const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${toSearch}`
-
-        fetch(url)
-          .then(res => {
-            if (!res.ok) {
-              throw new Error('From 7, Network request could not be completed')
-            }
-            if (!res.headers.get('content-type')?.includes('application/json')) {
-              throw new Error('Response is not in JSON format');
-            }
-            return res.json()
-          })
-          .then(data => {
-            setSearchResults(data.meals)
-          })
-          .catch(err => {
-            console.error('From 7', err)
-          })
-    }
-    handleSearch(searchValue)
-  }, [searchValue])
+  }, [searchValue]);
 
   return (
     <div className={styles.container}>
