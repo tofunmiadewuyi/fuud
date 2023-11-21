@@ -281,41 +281,43 @@ function DashboardPage(props) {
 
   return (
     <div className={styles.page}>
-      <div className={styles.random}>
-        <div className={styles['random-header']}>
-          <div className={styles['random-header-text']}>
-            <h3>Feeling adventurous?</h3>
-            <p>Find a random meal to make.</p>
+      <div className={styles.main}>
+        <div className={styles.random}>
+          <div className={styles['random-header']}>
+            <div className={styles['random-header-text']}>
+              <h3>Feeling adventurous?</h3>
+              <p>Find a random meal to make.</p>
+            </div>
+            <button onClick={handleRandomButtonClick}>
+              Randomize
+              <img src={randomIcon} alt="randomize icon" />
+            </button>
           </div>
-          <button onClick={handleRandomButtonClick}>
-            Randomize
-            <img src={randomIcon} alt="randomize icon" />
-          </button>
-        </div>
-        <div className={styles.randomMealImage} style={backgroundImage} onClick={handleRandomMealClick}>
-          <div className={styles.randomMealTint}>
-            <h3 className={styles.h3}>{randomMeal.name}</h3>
-            <p>{randomMeal.desc}</p>
-            <div className={styles.randomMealPills}>
-              <div className={styles.randomMealPill} onClick={(event) => handleRandomPillClick(event, randomMeal.area, 'Countries')}>{randomMeal.area}</div>
-              <div className={styles.randomMealPill}  onClick={(event) => handleRandomPillClick(event, randomMeal.category, 'Categories')}>{randomMeal.category}</div>
+          <div className={styles.randomMealImage} style={backgroundImage} onClick={handleRandomMealClick}>
+            <div className={styles.randomMealTint}>
+              <h3 className={styles.h3}>{randomMeal.name}</h3>
+              <p>{randomMeal.desc}</p>
+              <div className={styles.randomMealPills}>
+                <div className={styles.randomMealPill} onClick={(event) => handleRandomPillClick(event, randomMeal.area, 'Countries')}>{randomMeal.area}</div>
+                <div className={styles.randomMealPill}  onClick={(event) => handleRandomPillClick(event, randomMeal.category, 'Categories')}>{randomMeal.category}</div>
+              </div>
+            </div>
+            <div className={styles.fav} onClick={handleRandomSaveClick}>
+              <img src={randomMealIsSaved ? favFilled : favIcon} alt="favorites-icon" />
             </div>
           </div>
-          <div className={styles.fav} onClick={handleRandomSaveClick}>
-            <img src={randomMealIsSaved ? favFilled : favIcon} alt="favorites-icon" />
-          </div>
         </div>
-      </div>
-      <div className={styles.OTD}>
-        <OTD type="Meal" 
-          bgcolor="#38CFBB" 
-          name={mealOTD.name} 
-          image={mealOTD.mealImage} 
-          click={handleMealOTDClick} />
-        <OTD type="Category" 
-          bgcolor="#A8CF38" 
-          name={categoryOTD.categoryName}
-          click={() => handleDiscoverClick(categoryOTD.categoryName, 'Categories')} />
+        <div className={styles.OTD}>
+          <OTD type="Meal" 
+            bgcolor="#38CFBB" 
+            name={mealOTD.name} 
+            image={mealOTD.mealImage} 
+            click={handleMealOTDClick} />
+          <OTD type="Category" 
+            bgcolor="#A8CF38" 
+            name={categoryOTD.categoryName}
+            click={() => handleDiscoverClick(categoryOTD.categoryName, 'Categories')} />
+        </div>
       </div>
       <div className={styles.discover}>
         <div className={styles['discover-header']}>

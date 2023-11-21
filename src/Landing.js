@@ -27,8 +27,8 @@ function Landing() {
   }
 
   const handleWindowResize = () => {
-    if (window.innerWidth < 1280) {
-      console.log('Too small')
+    if (window.innerWidth < 1024) {
+      console.log('Too small:', window.innerWidth)
       setDeviceAllowed(false)
     } else {
       setDeviceAllowed(true)

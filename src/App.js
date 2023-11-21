@@ -27,7 +27,7 @@ function App() {
   }, [discoverItemSelected]);
 
   const handleWindowResize = () => {
-    if (window.innerWidth < 1280) {
+    if (window.innerWidth < 1024) {
       console.log('Too small')
       setDeviceAllowed(false)
     } else {

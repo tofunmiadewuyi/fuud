@@ -8,6 +8,12 @@
     padding: 56px 40px;
 }
 
+.main {
+    display: flex;
+    gap: 40px;
+    flex: 1;
+}
+
 .random {
     display: flex;
     flex-direction: column;
@@ -351,3 +357,33 @@ a:hover {
     font-weight: 500;
     color: rgba(251, 255, 229, 0.70);
 }
+
+@media screen and (min-width: 1024px) and (max-width: 1280px) {
+  .main {
+    flex-direction: column;
+    gap: 32px;
+    /* align-items: stretch; */
+  }
+    .random {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 24px;
+    }
+
+
+  /* .OTD {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    flex: 1;
+    max-width: 310px;
+} */
+
+  .OTD {
+    flex-direction: row;
+    max-width: none;
+    gap: 32px;
+    flex: none;
+    }
+  }
